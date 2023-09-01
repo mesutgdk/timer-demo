@@ -13,7 +13,9 @@
 		63915B372AA13BD800C7C3F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63915B362AA13BD800C7C3F3 /* Assets.xcassets */; };
 		63915B3A2AA13BD800C7C3F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63915B382AA13BD800C7C3F3 /* LaunchScreen.storyboard */; };
 		63915B422AA13C3F00C7C3F3 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63915B412AA13C3F00C7C3F3 /* Extension.swift */; };
-		63915B452AA13D2F00C7C3F3 /* AlarmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63915B442AA13D2F00C7C3F3 /* AlarmManager.swift */; };
+		63915B452AA13D2F00C7C3F3 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63915B442AA13D2F00C7C3F3 /* TimerManager.swift */; };
+		63915B4B2AA216F200C7C3F3 /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63915B4A2AA216F200C7C3F3 /* TimerModel.swift */; };
+		63915B4E2AA2178800C7C3F3 /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63915B4D2AA2178800C7C3F3 /* TimerViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +27,9 @@
 		63915B392AA13BD800C7C3F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63915B3B2AA13BD800C7C3F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63915B412AA13C3F00C7C3F3 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
-		63915B442AA13D2F00C7C3F3 /* AlarmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmManager.swift; sourceTree = "<group>"; };
+		63915B442AA13D2F00C7C3F3 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
+		63915B4A2AA216F200C7C3F3 /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
+		63915B4D2AA2178800C7C3F3 /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +65,7 @@
 				63915B2D2AA13BD600C7C3F3 /* AppDelegate.swift */,
 				63915B2F2AA13BD600C7C3F3 /* SceneDelegate.swift */,
 				63915B462AA13DAB00C7C3F3 /* Model */,
-				63915B472AA1417D00C7C3F3 /* View */,
+				63915B4C2AA2176300C7C3F3 /* TimerViewModel */,
 				63915B432AA13D1A00C7C3F3 /* Controller */,
 				63915B362AA13BD800C7C3F3 /* Assets.xcassets */,
 				63915B382AA13BD800C7C3F3 /* LaunchScreen.storyboard */,
@@ -82,16 +86,18 @@
 		63915B462AA13DAB00C7C3F3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				63915B442AA13D2F00C7C3F3 /* AlarmManager.swift */,
+				63915B4A2AA216F200C7C3F3 /* TimerModel.swift */,
+				63915B442AA13D2F00C7C3F3 /* TimerManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		63915B472AA1417D00C7C3F3 /* View */ = {
+		63915B4C2AA2176300C7C3F3 /* TimerViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				63915B4D2AA2178800C7C3F3 /* TimerViewModel.swift */,
 			);
-			path = View;
+			path = TimerViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,9 +170,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63915B4E2AA2178800C7C3F3 /* TimerViewModel.swift in Sources */,
 				63915B322AA13BD600C7C3F3 /* TimerViewController.swift in Sources */,
-				63915B452AA13D2F00C7C3F3 /* AlarmManager.swift in Sources */,
+				63915B452AA13D2F00C7C3F3 /* TimerManager.swift in Sources */,
 				63915B2E2AA13BD600C7C3F3 /* AppDelegate.swift in Sources */,
+				63915B4B2AA216F200C7C3F3 /* TimerModel.swift in Sources */,
 				63915B302AA13BD600C7C3F3 /* SceneDelegate.swift in Sources */,
 				63915B422AA13C3F00C7C3F3 /* Extension.swift in Sources */,
 			);

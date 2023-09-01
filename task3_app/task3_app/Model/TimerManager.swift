@@ -14,16 +14,6 @@ struct TimerManager {
     
     
     
-//    func getSelectedTimeFromPicker(pickerView: UIPickerView) {
-//        let selectedHourRow = pickerView.selectedRow(inComponent: 0)
-//        let selectedMinuteRow = pickerView.selectedRow(inComponent: 1)
-//
-//        let selectedMinute = minuteArray[selectedHourRow]
-//        let selectedSecond = secondArray[selectedMinuteRow]
-//
-//        print(selectedMinute,selectedSecond)
-//        setAlarmButtonTapped(selectedMinute: selectedMinute, selectedSecond: selectedSecond)
-//    }
     
     // MARK: - Creating an Alarm
 
