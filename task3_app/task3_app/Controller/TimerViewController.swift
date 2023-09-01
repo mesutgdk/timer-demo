@@ -24,7 +24,10 @@ class TimerViewController: UIViewController {
     private let countDownLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label
+        label.font = UIFont(name: "HelveticaNeue-Light", size: 33)
+        label.textAlignment = .center
+        label.layer.borderColor = UIColor.black.cgColor
+        label.layer.borderWidth = 1.5
         label.text = "11:11"
         return label
     } ()
@@ -37,7 +40,7 @@ class TimerViewController: UIViewController {
         button.layer.cornerRadius = 10
         button.backgroundColor = .systemGreen
         button.setTitle("Play/Pause", for: [])
-        button.addTarget(self, action: #selector(setButtonTapped), for: .primaryActionTriggered)
+        button.addTarget(self, action: #selector(playPauseTapped), for: .primaryActionTriggered)
         
         return button
     }()
@@ -83,7 +86,8 @@ class TimerViewController: UIViewController {
         ])
         // countDownLabel
         NSLayoutConstraint.activate([
-            countDownLabel.heightAnchor.constraint(equalToConstant: 100),
+            countDownLabel.heightAnchor.constraint(equalToConstant: 60),
+            countDownLabel.widthAnchor.constraint(equalToConstant: 100),
             countDownLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             countDownLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
@@ -107,22 +111,14 @@ class TimerViewController: UIViewController {
 }
 // MARK: - Actions
 extension TimerViewController{
+    @objc func playPauseTapped(){
+        
+    }
+    
     @objc func setButtonTapped(){
         
     }
-//
-//    func updateCountdownLabel() {
-//            let minutes = Int(remainingTime) / 60
-//            let seconds = Int(remainingTime) % 60
-//            countDownLabel.text = String(format: "%02d:%02d", minutes, seconds)
-//        }
-//    @objc func stopButtonTapped (){
-//        SoundManager.shared.stopAlarmSound()
-//        stopButton.isHidden = true
-//    }
-//    public func makeStopButtonVisible(_ isVisible: Bool){
-//        stopButton.isHidden = isVisible
-//    }
+   
     
 }
 // MARK: - PickerView Delegate and DataSourse
