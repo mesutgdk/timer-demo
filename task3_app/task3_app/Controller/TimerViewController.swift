@@ -7,7 +7,9 @@
 
 import UIKit
 
-class TimerViewController: UIViewController {
+final class TimerViewController: UIViewController {
+
+    private var timerViewModel = TimerViewModel()
 
     private let timerManager = TimerManager()
     
@@ -15,7 +17,7 @@ class TimerViewController: UIViewController {
     var isTimerRunning = false
     var remainingTime: TimeInterval = 0
     
-    private let datePicker: UIPickerView = {
+    private let timePicker: UIPickerView = {
         var picker = UIPickerView()
         picker.translatesAutoresizingMaskIntoConstraints = false
         return picker
@@ -66,22 +68,21 @@ class TimerViewController: UIViewController {
     }
     
     private func setup (){
-        view.addSubviews(datePicker,countDownLabel,timerButton,setResetButton)
+        view.addSubviews(timePicker,countDownLabel,timerButton,setResetButton)
       
         view.backgroundColor = .systemBackground
-        datePicker.delegate = self
-        datePicker.dataSource = self
-//        updateCountdownLabel()
-        
+        timePicker.delegate = self
+        timePicker.dataSource = self
+        updateCountdownLabel()
     }
     private func layout() {
         // datePicker
         NSLayoutConstraint.activate([
 //            datePicker.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
-            datePicker.heightAnchor.constraint(equalToConstant: 175),
-            datePicker.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40),
-            datePicker.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
-            datePicker.bottomAnchor.constraint(equalTo: countDownLabel.topAnchor, constant: -20)
+            timePicker.heightAnchor.constraint(equalToConstant: 175),
+            timePicker.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40),
+            timePicker.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
+            timePicker.bottomAnchor.constraint(equalTo: countDownLabel.topAnchor, constant: -20)
             
         ])
         // countDownLabel
@@ -111,12 +112,58 @@ class TimerViewController: UIViewController {
 }
 // MARK: - Actions
 extension TimerViewController{
+    
     @objc func playPauseTapped(){
-        
+        if timerViewModel.timerState == .paused {
+            let selectedMinutes = timerManager.minuteArray[timePicker.selectedRow(inComponent: 0)]
+            let selectedSeconds = timerManager.secondArray[timePicker.selectedRow(inComponent: 1)]
+            timerViewModel.startTimer(withMinutes: selectedMinutes, seconds: selectedSeconds)
+            startTimer()
+        } else {
+            timerViewModel.pauseTimer()
+            pauseTimer()
+        }
     }
     
     @objc func setButtonTapped(){
-        
+        timerViewModel.stopTimer()
+        timePicker.selectRow(0, inComponent: 0, animated: true)
+        timePicker.selectRow(0, inComponent: 1, animated: true)
+        updateCountdownLabel()
+    }
+    private func startTimer(){
+        timerButton.setTitle("Pause", for: .normal)
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        setResetButton.isEnabled = false
+        timerViewModel.timerState = .running
+    }
+    
+    @objc func updateTimer() {
+        timerViewModel.updateTimer()
+        updateCountdownLabel()
+        if timerViewModel.timerModel.remainingTime <= 0 {
+            stopTimer()
+        }
+    }
+    
+    private func pauseTimer(){
+        timerButton.setTitle("Play", for: .normal)
+        timerViewModel.pauseTimer()
+        timer?.invalidate()
+        setResetButton.isEnabled = true
+    }
+    
+    private func stopTimer() {
+        timerButton.setTitle("Play", for: .normal)
+        timerViewModel.stopTimer()
+        timer?.invalidate()
+        setResetButton.isEnabled = true
+    }
+    
+    private func updateCountdownLabel() {
+            let minutes = Int(timerViewModel.timerModel.remainingTime) / 60
+            let seconds = Int(timerViewModel.timerModel.remainingTime) % 60
+            countDownLabel.text = String(format: "%02d:%02d", minutes, seconds)
     }
    
     
