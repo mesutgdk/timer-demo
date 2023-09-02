@@ -6,9 +6,17 @@
 //
 
 import Foundation
+enum TimerState {
+    case stopped
+    case paused
+    case running
+}
 
 class TimerModel {
+    var timerState: TimerState = .stopped
+    
+    func toggleTimerState(){
+        timerState = (timerState == .paused) ? .running : .paused
+    }
     var remainingTime: TimeInterval = 0
-    var isRunning: Bool = false
-    var isPaused: Bool = false
 }

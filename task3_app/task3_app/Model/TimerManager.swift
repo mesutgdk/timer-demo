@@ -27,7 +27,7 @@ struct TimerManager {
         
         // Create a date based on the selected hour and minute
         var dateComponents = DateComponents()
-        dateComponents.hour
+//        dateComponents.hour
         dateComponents.minute = minute
         dateComponents.second = second
         

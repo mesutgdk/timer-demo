@@ -7,44 +7,36 @@
 
 import Foundation
 
-enum TimerState {
-    case paused
-    case running
-}
 class TimerViewModel {
     var timerModel = TimerModel()
     
-    var timerState: TimerState = .paused
-    
-    func toggleTimerState(){
-        timerState = (timerState == .paused) ? .running : .paused
-    }
+    var pausedTime: TimeInterval = 0
     
     func startTimer(withMinutes minutes: Int, seconds: Int) {
         let totalSeconds = minutes * 60 + seconds
+        
         timerModel.remainingTime = TimeInterval(totalSeconds)
-        timerModel.isRunning = true
-        timerModel.isPaused = false
     }
     
     func pauseTimer() {
-        timerState = .paused
-        timerModel.isPaused = true
+        timerModel.timerState = .paused
+//        timerModel.remainingTime = TimeInterval(pausedTime)
     }
     
-//    func resumeTimer() {
-//        timerModel.isPaused = false
-//    }
+    func resumeTimer() {
+        timerModel.toggleTimerState()
+//        timerModel.remainingTime = TimeInterval(pausedTime)
+    }
     
     func stopTimer() {
         timerModel.remainingTime = 0
-        timerModel.isRunning = false
-        timerModel.isPaused = false
+        timerModel.timerState = .paused
     }
     
     func updateTimer() {
-        if timerModel.isRunning && !timerModel.isPaused {
+        if timerModel.timerState == .running {
             timerModel.remainingTime -= 1
+            timerModel.remainingTime = pausedTime
         }
     }
 }

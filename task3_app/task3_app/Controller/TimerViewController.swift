@@ -14,8 +14,9 @@ final class TimerViewController: UIViewController {
     private let timerManager = TimerManager()
     
     var timer : Timer?
-    var isTimerRunning = false
-    var remainingTime: TimeInterval = 0
+    
+    var selectedMinute: Int = 0
+    var selectedSecond: Int = 0
     
     private let timePicker: UIPickerView = {
         var picker = UIPickerView()
@@ -30,7 +31,7 @@ final class TimerViewController: UIViewController {
         label.textAlignment = .center
         label.layer.borderColor = UIColor.black.cgColor
         label.layer.borderWidth = 1.5
-        label.text = "11:11"
+        label.text = ""
         return label
     } ()
     
@@ -114,14 +115,17 @@ final class TimerViewController: UIViewController {
 extension TimerViewController{
     
     @objc func playPauseTapped(){
-        if timerViewModel.timerState == .paused {
-            let selectedMinutes = timerManager.minuteArray[timePicker.selectedRow(inComponent: 0)]
-            let selectedSeconds = timerManager.secondArray[timePicker.selectedRow(inComponent: 1)]
-            timerViewModel.startTimer(withMinutes: selectedMinutes, seconds: selectedSeconds)
+        
+        if timerViewModel.timerModel.timerState == .stopped {
+            timerViewModel.startTimer(withMinutes: selectedMinute, seconds: selectedSecond)
             startTimer()
-        } else {
-            timerViewModel.pauseTimer()
+            print(selectedMinute,selectedSecond)
+            print("timerState is \(timerViewModel.timerModel.timerState)")
+        } else if timerViewModel.timerModel.timerState == .running{
             pauseTimer()
+            print("timerState is \(timerViewModel.timerModel.timerState)")
+        } else {
+            startTimer()
         }
     }
     
@@ -130,20 +134,25 @@ extension TimerViewController{
         timePicker.selectRow(0, inComponent: 0, animated: true)
         timePicker.selectRow(0, inComponent: 1, animated: true)
         updateCountdownLabel()
+        selectedMinute = 0
+        selectedSecond = 0
     }
     private func startTimer(){
         timerButton.setTitle("Pause", for: .normal)
+//        timerViewModel.timerModel.timerState = .running
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
         setResetButton.isEnabled = false
-        timerViewModel.timerState = .running
     }
     
     @objc func updateTimer() {
-        timerViewModel.updateTimer()
-        updateCountdownLabel()
         if timerViewModel.timerModel.remainingTime <= 0 {
             stopTimer()
         }
+       
+            timerViewModel.updateTimer()
+            updateCountdownLabel()
+            timerViewModel.timerModel.timerState = .running
+     
     }
     
     private func pauseTimer(){
@@ -195,5 +204,18 @@ extension TimerViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
 
 }
+
+// MARK: - Start/Pause Button Storing the Time
+extension TimerViewController{
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if component == 0 {
+            selectedMinute = timerManager.minuteArray[row]
+        } else{
+            selectedSecond = timerManager.secondArray[row]
+        }
+        updateCountdownLabel()
+    }
+}
+
 
 
