@@ -121,15 +121,11 @@ extension TimerViewController{
             timerViewModel.timerModel.timerState = .running
             timerViewModel.startTimer(withMinutes: selectedMinute, seconds: selectedSecond)
             startTimer()
-            print(selectedMinute,selectedSecond)
-            print("timerState is \(timerViewModel.timerModel.timerState)")
         case .running: // to pause
             pauseTimer()
-            print("timerState is \(timerViewModel.timerModel.timerState) ")
         case .paused: // to start after pause
             timerViewModel.timerModel.timerState = .running
             startTimer()
-            print("timerState is \(timerViewModel.timerModel.timerState)")
         }
         
     }
@@ -144,7 +140,6 @@ extension TimerViewController{
     }
     private func startTimer(){
         timerButton.setTitle("Pause", for: .normal)
-//        timerViewModel.timerModel.timerState = .running
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
         setResetButton.isEnabled = false
     }
@@ -155,7 +150,6 @@ extension TimerViewController{
         }
             timerViewModel.updateTimer()
             updateCountdownLabel()
-//            timerViewModel.timerModel.timerState = .running
     }
     
     private func pauseTimer(){

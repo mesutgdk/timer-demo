@@ -25,17 +25,12 @@ struct TimerManager {
         content.body = "Hurry Up Hurry Up"
         content.sound = .criticalSoundNamed(UNNotificationSoundName(rawValue: "wakeup.mp3"), withAudioVolume: 1)
         
-        // Create a date based on the selected hour and minute
-        var dateComponents = DateComponents()
-//        dateComponents.hour
-        dateComponents.minute = minute
-        dateComponents.second = second
         
         // Create a trigger based on the date
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
         
         // Create a request with the content and trigger
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: "timerElapsed", content: content, trigger: trigger)
         
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         
@@ -43,16 +38,5 @@ struct TimerManager {
         
     }
     
-//    private func callTheAlart(){
-//        // Show success message using UIAlertController
-//        let alert = UIAlertController(title: "Successfull", message: "Alarm successfully set!", preferredStyle: .alert)
-//        let okayAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
-//        alert.addAction(okayAction)
-//
-//        // Present the alert
-//        if let VC = UIApplication.shared.windows.first?.rootViewController {
-//            VC.present(alert, animated: true, completion: nil)
-//        }
-//    }
     
 }
