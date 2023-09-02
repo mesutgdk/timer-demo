@@ -116,17 +116,22 @@ extension TimerViewController{
     
     @objc func playPauseTapped(){
         
-        if timerViewModel.timerModel.timerState == .stopped {
+        switch timerViewModel.timerModel.timerState {
+        case .stopped: //first start
+            timerViewModel.timerModel.timerState = .running
             timerViewModel.startTimer(withMinutes: selectedMinute, seconds: selectedSecond)
             startTimer()
             print(selectedMinute,selectedSecond)
             print("timerState is \(timerViewModel.timerModel.timerState)")
-        } else if timerViewModel.timerModel.timerState == .running{
+        case .running: // to pause
             pauseTimer()
-            print("timerState is \(timerViewModel.timerModel.timerState)")
-        } else {
+            print("timerState is \(timerViewModel.timerModel.timerState) ")
+        case .paused: // to start after pause
+            timerViewModel.timerModel.timerState = .running
             startTimer()
+            print("timerState is \(timerViewModel.timerModel.timerState)")
         }
+        
     }
     
     @objc func setButtonTapped(){
@@ -148,11 +153,9 @@ extension TimerViewController{
         if timerViewModel.timerModel.remainingTime <= 0 {
             stopTimer()
         }
-       
             timerViewModel.updateTimer()
             updateCountdownLabel()
-            timerViewModel.timerModel.timerState = .running
-     
+//            timerViewModel.timerModel.timerState = .running
     }
     
     private func pauseTimer(){

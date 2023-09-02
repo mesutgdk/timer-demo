@@ -16,6 +16,7 @@ class TimerViewModel {
         let totalSeconds = minutes * 60 + seconds
         
         timerModel.remainingTime = TimeInterval(totalSeconds)
+//        print(timerModel.remainingTime)
     }
     
     func pauseTimer() {
@@ -30,13 +31,12 @@ class TimerViewModel {
     
     func stopTimer() {
         timerModel.remainingTime = 0
-        timerModel.timerState = .paused
+        timerModel.timerState = .stopped
     }
     
     func updateTimer() {
         if timerModel.timerState == .running {
             timerModel.remainingTime -= 1
-            timerModel.remainingTime = pausedTime
         }
     }
 }
