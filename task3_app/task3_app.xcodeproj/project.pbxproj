@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		638120BE2AA3B6CB00FE7352 /* wakeup.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 638120BD2AA3B6CB00FE7352 /* wakeup.mp3 */; };
+		638120C02AA3C31C00FE7352 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638120BF2AA3C31C00FE7352 /* SoundManager.swift */; };
 		63915B2E2AA13BD600C7C3F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63915B2D2AA13BD600C7C3F3 /* AppDelegate.swift */; };
 		63915B302AA13BD600C7C3F3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63915B2F2AA13BD600C7C3F3 /* SceneDelegate.swift */; };
 		63915B322AA13BD600C7C3F3 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63915B312AA13BD600C7C3F3 /* TimerViewController.swift */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		638120BD2AA3B6CB00FE7352 /* wakeup.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wakeup.mp3; sourceTree = SOURCE_ROOT; };
+		638120BF2AA3C31C00FE7352 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		63915B2A2AA13BD600C7C3F3 /* task3_app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = task3_app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63915B2D2AA13BD600C7C3F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63915B2F2AA13BD600C7C3F3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 			children = (
 				63915B4A2AA216F200C7C3F3 /* TimerModel.swift */,
 				63915B442AA13D2F00C7C3F3 /* TimerManager.swift */,
+				638120BF2AA3C31C00FE7352 /* SoundManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63915B4E2AA2178800C7C3F3 /* TimerViewModel.swift in Sources */,
+				638120C02AA3C31C00FE7352 /* SoundManager.swift in Sources */,
 				63915B322AA13BD600C7C3F3 /* TimerViewController.swift in Sources */,
 				63915B452AA13D2F00C7C3F3 /* TimerManager.swift in Sources */,
 				63915B2E2AA13BD600C7C3F3 /* AppDelegate.swift in Sources */,

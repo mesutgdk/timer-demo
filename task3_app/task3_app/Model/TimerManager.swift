@@ -11,13 +11,10 @@ import UIKit
 struct TimerManager {
     let minuteArray = Array(0...59)
     let secondArray = Array(0...59)
-    
-    
-    
-    
-    // MARK: - Creating an Alarm
+     
+    // MARK: - Creating a Notification
 
-    private func setAlarmButtonTapped(selectedMinute minute: Int, selectedSecond second: Int) {
+    func callTheCops() {
         
         // Create a UNMutableNotificationContent
         let content = UNMutableNotificationContent()
@@ -32,11 +29,13 @@ struct TimerManager {
         // Create a request with the content and trigger
         let request = UNNotificationRequest(identifier: "timerElapsed", content: content, trigger: trigger)
         
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-        
-//        callTheAlart()
-        
+        UNUserNotificationCenter.current().add(request) { (error) in
+            if let error = error {
+                print("Error scheduling notification: \(error.localizedDescription)")
+            } else {
+                print("Notification scheduled successfully.")
+            }
+        }
     }
-    
     
 }

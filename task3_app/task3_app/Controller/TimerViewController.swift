@@ -142,14 +142,23 @@ extension TimerViewController{
         timerButton.setTitle("Pause", for: .normal)
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
         setResetButton.isEnabled = false
+        
     }
     
     @objc func updateTimer() {
         if timerViewModel.timerModel.remainingTime <= 0 {
+            SoundManager.shared.playAlarmSound()
+//            print("who let the dogs out, who?")
+
+            DispatchQueue.main.async {
+//                print("who let the dogs out, who?")
+//                self.timerManager.callTheCops()
+            }
             stopTimer()
+            
         }
-            timerViewModel.updateTimer()
-            updateCountdownLabel()
+        timerViewModel.updateTimer()
+        updateCountdownLabel()
     }
     
     private func pauseTimer(){
@@ -171,7 +180,6 @@ extension TimerViewController{
             let seconds = Int(timerViewModel.timerModel.remainingTime) % 60
             countDownLabel.text = String(format: "%02d:%02d", minutes, seconds)
     }
-   
     
 }
 // MARK: - PickerView Delegate and DataSourse
