@@ -9,9 +9,9 @@ import UIKit
 
 final class TimerViewController: UIViewController {
 
-    private var timerViewModel = TimerViewModel()
+    var timerViewModel = TimerViewModel()
 
-    private let timerManager = TimerManager()
+    let timerManager = TimerManager()
     
     var timer : Timer?
     
@@ -66,6 +66,11 @@ final class TimerViewController: UIViewController {
         super.viewDidLoad()
         setup()
         layout()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        callNotification()
     }
     
     private func setup (){
@@ -146,17 +151,15 @@ extension TimerViewController{
     }
     
     @objc func updateTimer() {
-        if timerViewModel.timerModel.remainingTime <= 0 {
-            SoundManager.shared.playAlarmSound()
-//            print("who let the dogs out, who?")
-
-            DispatchQueue.main.async {
-//                print("who let the dogs out, who?")
-//                self.timerManager.callTheCops()
-            }
+        if timerViewModel.timerModel.remainingTime == 1 {
+            DispatchQueue.main.asyncAfter(deadline: .now()+1, execute: {
+                SoundManager.shared.playAlarmSound()
+                self.stopTimer()
+            })
+        } else if timerViewModel.timerModel.remainingTime == 0 { // it is for when user presses play at 00:00
             stopTimer()
-            
         }
+  
         timerViewModel.updateTimer()
         updateCountdownLabel()
     }
@@ -176,12 +179,20 @@ extension TimerViewController{
     }
     
     private func updateCountdownLabel() {
-            let minutes = Int(timerViewModel.timerModel.remainingTime) / 60
-            let seconds = Int(timerViewModel.timerModel.remainingTime) % 60
-            countDownLabel.text = String(format: "%02d:%02d", minutes, seconds)
+        let minutes = Int(timerViewModel.timerModel.remainingTime) / 60
+        let seconds = Int(timerViewModel.timerModel.remainingTime) % 60
+        countDownLabel.text = String(format: "%02d:%02d", minutes, seconds)
     }
     
+    private func callNotification(){
+        let remainingSeconds = timerViewModel.timerModel.remainingTime
+//        let lastMinute = Int(remainingSeconds) / 60
+//        let lastSecond = Int(remainingSeconds) % 60
+        timerManager.callTheCopsAtDifferenceUniverse(murderTime: remainingSeconds)
+        print("notification must appear after remainedTimeIs:\(remainingSeconds) seconds")
+    }
 }
+
 // MARK: - PickerView Delegate and DataSourse
 extension TimerViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

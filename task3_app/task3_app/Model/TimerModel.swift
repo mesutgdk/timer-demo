@@ -15,7 +15,7 @@ enum TimerState {
 class TimerModel {
     var timerState: TimerState = .stopped
     
-    func toggleTimerState(){
+    func toggleTimerState(){ // it is really hard to use, but a nice sight .d
         timerState = (timerState == .paused) ? .running : .paused
     }
     var remainingTime: TimeInterval = 0

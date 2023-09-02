@@ -16,7 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (approved, error) in
             if approved {
-                print("İzin Alındı Hadi İyisin")
+                DispatchQueue.main.async {
+                    UIApplication.shared.registerForRemoteNotifications()
+                    print("İzin Alındı Hadi İyisin")
+                }
+                
             } else {
                 print("İzin Verilmedi, Malesef")
             }

@@ -19,7 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = vc
         window.makeKeyAndVisible()
-        self.window = window    }
+        self.window = window
+    }
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
@@ -47,6 +48,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
+//        let timeManager = vc.timerManager
+//        let remainingSeconds = vc.timerViewModel.timerModel.remainingTime
+//        let lastMinute = Int(remainingSeconds) / 60
+//        let lastSecond = Int(remainingSeconds) % 60
+//        timeManager.callTheCops(murderMinute: lastMinute, murderSecond: lastSecond)
     }
 
 

@@ -27,8 +27,6 @@ final class SoundManager {
         
         do {
             player = try AVAudioPlayer(contentsOf: audioFileURL)
-//            player?.volume = 1
-//            player?.setVolume(maxVolume, fadeDuration: duration)
             player?.prepareToPlay()
             player?.play()
         } catch {
@@ -44,7 +42,7 @@ final class SoundManager {
     private func callTheAlart(){
         // Show success message using UIAlertController
         let alert = UIAlertController(title: "Time out", message: "End of the Road", preferredStyle: .alert)
-        let okayAction = UIAlertAction(title: "Silence!", style: .default) { (okayAction) in
+        let okayAction = UIAlertAction(title: "Silence! Kill You!", style: .default) { (okayAction) in
             self.stopAlarmSound()
         }
         alert.addAction(okayAction)

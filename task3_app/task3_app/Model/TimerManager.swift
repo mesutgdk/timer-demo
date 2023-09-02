@@ -14,20 +14,19 @@ struct TimerManager {
      
     // MARK: - Creating a Notification
 
-    func callTheCops() {
+    func callTheCopsAtDifferenceUniverse(murderTime remainedTime: TimeInterval) {
         
         // Create a UNMutableNotificationContent
         let content = UNMutableNotificationContent()
         content.title = "Timer has elapsed!"
-        content.body = "Hurry Up Hurry Up"
+        content.body = "For whom the bells are ringing!"
         content.sound = .criticalSoundNamed(UNNotificationSoundName(rawValue: "wakeup.mp3"), withAudioVolume: 1)
         
-        
         // Create a trigger based on the date
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: remainedTime, repeats: false)
         
         // Create a request with the content and trigger
-        let request = UNNotificationRequest(identifier: "timerElapsed", content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         
         UNUserNotificationCenter.current().add(request) { (error) in
             if let error = error {
