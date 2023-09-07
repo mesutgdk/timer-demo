@@ -1,6 +1,8 @@
 # Timer-demo
 This will save you from burning meals and missing meetings 🗣️
 
+## Features and Visual Feast 🐥
+
 App asks permisson to send you notifications
 
 ![gif1](https://github.com/mesutgdk/timer-demo/assets/112901255/3dca5aed-ce28-4895-b3fe-0fcf45ee2ac0)
